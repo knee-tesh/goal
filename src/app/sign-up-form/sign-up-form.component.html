@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="navLink">
+        <a routerLink="/list" routerLinkActive="active"><button type="button">List</button></a>
+    </div>
+    <form [formGroup] = "signUp" class="formClass" (ngSubmit)="submit()">
+        <div class="formField">
+            <label for="brand_name">Brand Name</label>
+            <input #brand_name type="text" formControlName = "brand_name">
+        </div>
+        <div class="formField">
+            <label for="logo">Brand Logo</label>
+            <input #logo type="text" formControlName = "logo">
+        </div>
+        <ng-container formGroupName="details">
+            <div class="formField">
+                <label for="name">Name</label>
+                <input #name type="text" formControlName="name" />
+            </div>
+            <div class="formField">
+                <label for="designation">Designation</label>
+                <input #designation type="text" formControlName="designation" />
+            </div>
+            <div class="formField">
+                <label for="phone">Phone</label>
+                <input #phone type="text" formControlName="phone" />
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                    class="alert alert-danger"
+                >
+                    <div *ngIf="phone.error.pattern">
+                        Please Enter 10 digit number
+                    </div>
+
+                </div>
+            </div>
+            <div class="formField">
+                <label for="email">Email</label>
+                <input type="email" formControlName="email" #email />
+                <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                    class="alert alert-danger"
+                >
+                    <div *ngIf="email.error.email">
+                        Please Enter a valid email address
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+        <button class="formSubmit" type="submit" [disabled]="signUp.invalid">Submit</button>
+        <div *ngIf = "submitError" class="submitError">
+            <p>Either Phone number or Email is already in use!</p>
+            <p> Please try different phone number and email. </p>
+        </div>
+    </form>
+    
+</div>

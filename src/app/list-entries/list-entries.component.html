@@ -1,0 +1,52 @@
+<div class="navBar">
+    <ul class="list">
+        <li class="list-item" (click)="seggregateTableData('pending')">Pending</li>
+        <li class="list-item" (click)="seggregateTableData('approved')">Approved</li>
+        <li class="list-item" (click)="seggregateTableData('reject')">Rejected</li>
+    </ul>
+</div>
+<div class="searchbar">
+    <input class="search-input" type="text" placeholder="Search.." (keyup)="searchItem($event)" name="search">
+</div>
+<div class="itemTable">
+    <!-- <ng-container *ngIf="dataFlag"> -->
+        <div class="item" *ngFor="let data of tableData;i as index">
+            <div class="item-header">
+                <div class="item-image">
+                    <img [src]="data['logo']">
+                </div>
+                <div class="item-data">
+                    <div class="item-data-name">{{ data['brand_name'] }}</div>
+                    <div class="item-data-summary">Merchant Category</div>
+                </div>
+                <div *ngIf="pendingStatus" class="item-actions">
+                    <button class="reject" type="button" (click)="changesState(data,false)">Reject</button>
+                    <button class="approve" type="button" (click)="changesState(data,true)">Approve</button>
+                </div>
+            </div>
+            <div class="item-data">
+                <div class="item-info">Primary Contact</div>
+                <div class="item-data-details">
+                    <div class="item-data-details-name">
+                        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+                        {{ data['details'].name }}
+                    </div>
+                    <div class="item-data-details-work">
+                        <i class="fa fa-briefcase mr-2"></i>
+                        {{ data['details'].designation }}
+                    </div>
+                </div>
+                <div class="item-data-details">
+                    <div>
+                        <i class="fa fa-envelope-square mr-2"></i>
+                        {{ data['details'].email }}
+                    </div>
+                    <div>
+                        <i class="fa fa-mobile-alt mr-2"></i>
+                        {{ data['details'].phone }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- </ng-container> -->
+</div>
